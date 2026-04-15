@@ -1,0 +1,36 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    margin: 0;
+    padding: 0;
+    font-family: "Noto Sans KR"; /*, sans-serif */
+    font-size: 12px;
+    color:#333;
+}
+
+ul,li{
+    list-style: none;
+}
+
+img{border:0}
+
+a{text-decoration: none;}
+
+
+/* @font-face {
+    font-family: 'Malgun Gothic';
+    src: url('url/test/malgunsl.woff') format('woff');
+    font-weight: 400;
+}
+@font-face {
+    font-family: 'Malgun Gothic';
+    src: url(' url/malgun.woff') format('woff');
+    font-weight: 500;
+}
+@font-face {
+    font-family: 'Malgun Gothic';
+    src: url(' url/malgunbd.woff') format('woff');
+    font-weight: 700;
+} */

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LX글라스</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/media.css">
+    <script src="./js/jquery.js"></script>
+    <script src="./js/jquery-ui.js"></script>
+    <script src="./js/jquery.mousewheel.min.js"></script>
+    <script src="./js/jquery.easing.1.3.min.js"></script>
+
+    <script>
+
+            /* 상단 네비 배너 움직임 */
+        $(document).ready(function(){
+            $('.sub').css('display','none');
+
+            $('.nav_ar > li').mouseenter(function(){
+            $('.sub').hide();
+            $(this)
+            .find('.sub')
+            .css({display:'block',opacity:0})
+            .animate({opacity:1},400);
+          });
+        $('.nav_ar> li').mouseleave(function(){
+            $('.sub')
+            .animate({opacity:0},200);
+        });
+
+        });
+
+
+
+        $(document).ready(function(){
+            //슬라이드 되는 이미지들 
+            var visual = $('#main > .main_img > li');
+            // 이벤트를 사용할 버튼
+            var button = $('.btns > li')
+           
+            var current = 0; //현재 보이는 이미지 번호
+            var setIntervalId; //자동실행문이 저장되는 공간
+
+            button.click(function(e){
+                e.preventDefault(); //a태그 이벤트 상실
+                var i = $(this).index();
+                console.log(i)
+                //버튼에 스타일 적용
+                button.removeClass('on');
+                $(this).addClass('on');
+
+
+                move(i); //애니메이션이 되는 함수 호출
+
+
+            });
+
+            // //자동 실행을 중지하는 함수 
+            // $('#main').on({
+            //     mouseover: function(){
+            //         clearInterval(setIntervalId)
+            //     },
+            //     mouseout:function(){
+            //          timer(); //자동실행함수 호출 
+            //     }
+            // })
+
+            timer(); //자동실행함수 호출 
+            //자동실행하는 함수
+            function timer(){
+                setIntervalId = setInterval(function(){
+                     var n = current + 1;
+                     if(n == 3){ //0 1 2 3 보여지는 이미지 갯수까지 반복실행 다시 초기화 
+                        n = 0; 
+                        
+                     }
+                     move(n);
+                },4000);
+                //setInterval(함수(){},시간);
+            }
+
+            function move(i){
+                if(current == i) return;
+                //console.log(i)
+                var currentEl = visual.eq(current); //현재 메인영역 있는 이미지
+                var nextEl = visual.eq(i); //지금 클릭한 버튼에 인텍스 값을 이용해서 이미지 선택
+
+                currentEl.css({opacity:1}).stop().animate({opacity:0},2000);
+                nextEl.css({opacity:0}).stop().animate({opacity:1},2000);
+                //nextEl -> currentEl
+
+                button.removeClass('on');
+                button.eq(i).addClass('on');
+
+                current = i; // next가 current가 되는 상황
+            } 
+            
+        });
+
+
+
+
+        // $(document).ready(function(){
+        //   var wh1 = $(window).height();//현재 웹브라우저 높이값
+        //   $('#wrap > .section').height(wh1);//대상에 높이를 웹브라저의 높이값으로 지정
+
+        //   $(window).resize(function(){//대상(웹브라우저)의 크기가 변할때 실행하는함수
+        //         var wh2 = $(window).height();// 웹브라우저에 크기가 바뀔때 마다 높이값
+        //         $('#wrap > .section').height(wh2);//대상에 높이를 웹브라저의 높이값으로 지정
+        //   });
+
+
+        //   //마우스휠
+        //   $('#wrap > .section').mousewheel(function(e,delta){
+        //      //e는 마우스휠이벤트를 의미, delta는 마우스 휠방향의 의미
+        //      if(delta > 0){// -값
+        //        var prev= $(this).prev().offset().top;//스크롤탑 이동하는 값을 설정
+        //        console.log(prev);
+        //        $('html,body').stop().animate({scrollTop:prev},1000,'easeOutExpo');
+        //        //스크롤 애니메이션
+        //      }else if(delta < 0){// +값
+        //        var next= $(this).next().offset().top;//스크롤탑 이동하는 값을 설정
+        //        $('html,body').stop().animate({scrollTop:next},1000,'easeOutExpo');
+        //        //스크롤 애니메이션
+        //      }
+
+        //   })
+
+        // });
+    </script>
+</head>
+<body>
+    <div id="wrap">
+        <!-- 상단영역 -->
+        <header id="header" class="section">
+            <div id="header_in">
+                <h1 class="logo"><img src="./images/logo.png" alt=""></h1>
+                
+                <div class="group">
+                <nav class="nav">
+                    <ul class="nav_ar">
+                        <li class="mn1">
+                            <a href="#">회사소개</a>
+                            <ul class="sub">
+                                <li><a href="">About LX글라스</a></li>
+                                <li><a href="">VISION</a></li>
+                                <li><a href="">정도경영</a></li>
+                                <li><a href="">IR정보</a></li>
+                                <li><a href="">사업소개</a></li>
+                                <li><a href="">듀오라이트 클럽</a></li>
+                                <li><a href="">R&D</a></li>
+                                <li><a href="">ESG</a></li>
+                                <li><a href="">오시는 길</a></li>
+                            </ul>
+                        </li>
+                        <li class="mn2">
+                            <a href="#">제품소개</a>
+                            <ul class="sub">
+                                <li><a href="">코팅유리</a></li>
+                                <li><a href="">코팅유리</a></li>
+                                <li><a href="">가공유리</a></li>
+                                <li><a href="">특수유리</a></li>
+                                <li><a href="">자동차용유리</a></li>
+                                <li><a href="">단열스페이서</a></li>
+                                <li><a href="">용도별 유리 확인</a></li>
+                                <li><a href="">코팅유리 성능 확인</a></li>
+                            </ul>
+                        </li>
+                        <li class="mn3">
+                            <a href="#">자료실</a>
+                            <ul class="sub">
+                                <li><a href="">시공사례</a></li>
+                                <li><a href="">보도자료</a></li>
+                                <li><a href="">홍보영상</a></li>
+                                <li><a href="">기술지원</a></li>
+                                <li><a href="">기술자료</a></li>
+                            </ul>
+                        </li>
+                        <!-- <li><a href="#">투자정보</a></li> -->
+                        <li class="mn4">
+                            <a href="#">인재채용</a>
+                            <ul class="sub">
+                                <li><a href="">인사제도</a></li>
+                                <li><a href="">채용정보</a></li>
+                            </ul>
+                        </li>
+                        <li class="mn5">
+                            <a href="#">고객지원</a>
+                            <ul class="sub">
+                                <li><a href="">대리점 안내</a></li>
+                                <li><a href="">문의하기</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                        
+                        
+                </nav>
+                
+                <ul class="ko">
+                    <li><a href="#">KO</a></li>
+                    <li><a href="#">EN</a></li>
+                </ul>
+                <a href="" class="sh"><img src="./images/search.png" alt=""></a>
+                </div>
+            </div>
+        </header>
+        <!-- 메인영역 -->
+        <main id="main" class="section">
+            <ul class="main_img">
+                <li class="mg1"></li>
+                <li class="mg2"></li>
+                <li class="mg3"></li>
+            </ul>
+            <ul class="btns">
+                <li class="on"><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+            </ul>
+            <div class="txt_mn">
+                <h2>LX GLAS</h2>
+                <span>세상을 이어주는 창,<br>
+                그 시작을 LX글라스가 함께 합니다.</span>
+
+                <p>LX글라스는 1957년에 설립되어 각종 원판 유리 및 고기능성 유리를<br>
+                제조 밑 판매하는 국내 최초의 유리 전문기업으로 한국의 유리산업을<br>
+                선도해오고 있습니다.</p>
+                <a href="">VIEW MORE +</a>
+            </div>
+
+        </main>
+        <!-- 컨텐츠영역 -->
+        <section id="contents" class="section">
+            <article id="lx">
+                <section class="txt">
+                <h4>LX글라스는 1957년 설립된<br>
+                &nbsp;&nbsp;국내 최초의 유리 전문 기업입니다.</h4>
+                <p>국내 최초로 로이유리를 생산하였고, 고성능 코팅유리, 스마트글라스,<br>
+                    가전용유리 등 다양한 제품의 기술 개발을 이어가고 있으며 건축물의 에너지를<br>
+                    절약하고 환경을 보호하기 위한 다양한 솔루션을 개발하는 등 친환경적이고<br>
+                    스마트한 주거환경을 만들기 위해 최선을 다하고 있습니다.</p>
+                </section>
+                <h1 class="im"></h1>
+            </article>
+
+            <article id="bn">
+                <header class="header_bn">
+                    <p>&nbsp;Business</p>
+                    <h4>&nbsp;&nbsp;기업소개</h4>
+                </header>
+                <ul>
+                    <li class="bn_1">
+                        <div class="txt_ga">
+                        <h3>Glass Business</h3>
+                        <p>국내 최초로 로이유리를 개발하였고 고성능<br>
+                        코팅유리, 가전용 유리 등 끊임없이 제품 개발을<br>
+                        이어가고 있습니다.</p>
+                        </div>
+                        <h4><a href=""><img src="./images/arrow1.png" alt=""></a></h4>
+                    </li>
+                    <li class="bn_2">
+                        <div class="txt_ga">
+                        <h3>R&D</h3>
+                        <p>국내 최초로 로이유리를 개발하였고 고성능<br>
+                        코팅유리, 가전용 유리 등 끊임없이 제품 개발을<br>
+                        이어가고 있습니다.</p>
+                        </div>
+                        <h4><a href=""><img src="./images/arrow1.png" alt=""></a></h4>
+                    </li>
+                    <li class="bn_3">
+                        <div class="txt_ga">
+                        <h3>NerWork</h3>
+                        <p>국내 최초로 로이유리를 개발하였고 고성능<br>
+                        코팅유리, 가전용 유리 등 끊임없이 제품 개발을<br>
+                        이어가고 있습니다.</p>
+                        </div>
+                        <h4><a href=""><img src="./images/arrow1.png" alt=""></a></h4>
+                    </li>
+                </ul>
+            </article>
+
+
+            <article id="fi" class="section">
+                <header class="header_fi">
+                    <p>&nbsp;Our Glass</p>
+                    <h4>&nbsp;&nbsp;사업분야</h4>
+                </header>
+                <section>
+                 <ul class="txt_fi">
+                    <li class="fi_1">
+                        <div class="header">
+                        <h1>01</h1>
+                        </div>
+                        <div class="txt_ga">
+                            <h4>건축용 및 자동차용 판유리</h4>
+                            <p>세계적인 플로트 공법으로 유리의 기본이 되는 맑고 투명한<br>
+                            고품질의 판유리를 생산 및 공급합니다.</p>
+                        </div>
+                        
+                    </li>
+                    <li class="fi_2">
+                        <div class="header">
+                         <h1>02</h1>
+                         </div>
+                        <div class="txt_ga">
+                            <h4>건축용 코팅유리</h4>
+                            <p>1980년대 국내 최초로 코팅유리를 개발한 이래 유리를<br>
+                            통한 에너지 손실을 절감시키고자 단열효과를 극대화한<br>
+                            에너지 절약형 유리를 지속적으로 연구 개발하고 있습니다.</p>
+                        </div>
+                        
+                    </li>
+                    <li class="fi_3">
+                        <div class="header">
+                         <h1>03</h1>
+                        </div>
+                        <div class="txt_ga">
+                            <h4>가공 및 특수유리</h4>
+                            <p>두 장의 판유리와 스페이서를 이용하여 단열효과를 높힌<br>
+                            복층유리, 강한 내열성을 가진 강화유리와 화염, 연기, 열의<br>
+                            전달을 막아주는 차열방화유리를 개발 및 공급하고 있습니다.</p>
+                        </div>
+                        
+                    </li>
+                 </ul>
+                 <ul class="im_fi">
+                    <li class="im_fi1"></li>
+                    <li class="im_fi2"></li>
+                    <li class="im_fi3"></li>
+                 </ul>
+                 </section>
+
+            </article>
+            
+
+            <article id="po" class="section">
+                <header class="header_po">
+                    <p>&nbsp;Our Glass</p>
+                    <h4>&nbsp;&nbsp;제품소개</h4>
+                </header>
+                <ul>
+                    <li>
+                        <h1 class="im_po1"></h1>
+                        <div>
+                            <h3>코팅유리</h3>
+                            <p>판유리 한쪽 면에 은을 코팅하여 단열효과를<br>
+                            극대화한 에너지 절약형 유리입니다.</p>
+                        </div>
+                        <h4><a href=""><img src="./images/arrow1.png" alt=""></a></h4>
+                    </li>
+
+                    <li>
+                        <h1 class="im_po2"></h1>
+                        <div>
+                            <h3>원판유리</h3>
+                            <p>세계적인 플로트 공법으로 생산되는 맑고<br>
+                            투명한 고품질 판유리입니다.</p>
+                        </div>
+                        <h4><a href=""><img src="./images/arrow1.png" alt=""></a></h4>
+                    </li>
+
+                    <li>
+                        <h1 class="im_po3"></h1>
+                        <div>
+                            <h3>복층유리</h3>
+                            <p>두 장의 판유리 사이에 공기층을 두어 단열<br>
+                            성능을 높인 유리입니다.</p>
+                        </div>
+                        <h4><a href=""><img src="./images/arrow1.png" alt=""></a></h4>
+                    </li>
+                    
+                    <li>
+                        <h1 class="im_po4"></h1>
+                        <div>
+                            <h3>특수유리</h3>
+                            <p>복층유리, 방화유리, 가전제품 외장용 유리 등<br>
+                            코팅유리 기술을 기반으로 다양한<br>
+                            솔루션을 개발합니다.</p>
+                        </div>
+                        <h4><a href=""><img src="./images/arrow1.png" alt=""></a></h4>
+                    </li>
+                </ul>
+            </article>
+
+
+            <article id="md" class="section">
+                <header class="header_md">
+                    <p>&nbsp;media</p>
+                    <h4>&nbsp;&nbsp;뉴스룸</h4>
+                </header>
+
+                <div class="group_md">
+                <section class="im_md">
+                    <img class="im_md1" src="./images/뉴스룸1.PNG" alt="">
+                    <div  class="im_md23">
+                        <img class="im_md2" src="./images/뉴스룸2.PNG" alt="">
+                        <img class="im_md3" src="./images/뉴스룸3.PNG" alt="">
+                    </div>
+                </section>
+                <footer class="txt_md">
+                     <ul>
+                        <li><p>이사 대신 성능 개선... 홈리모델링 시장 확대 속 '고성능 유리' 주목</p></li>
+                        <li><p>LX글라스 '리얼 그레이' 시리즈, 상업용 시장서 바른 확산... 설계 물량 5배 증가</p></li>
+                        <li><p>LX글라스, 글로벌스탠다드 경영대상 장관상 수상</p></li>
+                    </ul>
+                </footer>
+                </div>
+            </article>
+
+
+            <article id="sp" class="section">
+                <header class="header_sp">
+                    <p>&nbsp;support</p>
+                    <h4>&nbsp;&nbsp;문의</h4>
+                </header>
+
+                <section class="im_sp">
+                    <div class="txt_sp">
+                        <p>Recruit</p>
+                        <h3>도전과 혁신으로, 새로운 미래의 연결을<br>
+                        꿈꾸는 여러분을 기다리고 있습니다.</h3>
+                    </div>
+                    <ul>
+                        <li>
+                            <h4>채용정보</h4>
+                            <span>사업의 확장 및 개선을 위한<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;이제 채용을 수시로 진행하고 있습니다.</span>
+                            <a href=""><img src="./images/arrow1.png" alt=""></a>
+                        </li>
+                        <li>
+                            <h4>문의사항</h4>
+                            <span>친절하게 도와드리겠습니다.</span>
+                            <a href=""><img src="./images/arrow1.png" alt=""></a>
+                        </li>
+                    </ul>
+                </section>
+
+            </article>
+
+        </section>
+
+        
+        <!-- 하단영역 -->
+        <footer id="footer">
+            <div id="footer_in">
+                <h1><img src="./images/logo.png" alt=""></h1>
+                <!-- <ul class="txt_ft">
+                    <li>
+                        <h4>대표자</h4>
+                        <p>이강훈</p>
+                    </li>
+                    <li>
+                        <h4>사업자 번호</h4>
+                        <p>542-88-01592</p>
+                    </li>
+                    <li>
+                        <h4>주소</h4>
+                        <p>서울특별시 서초구 효령로 72길 60 한전아트센터 본관 7~8층</p>
+                    </li>
+                </ul> -->
+
+                <div class="txt_ft">
+                    <p><b>대표자</b>이강훈</p>
+                    <p><b>사업자 번호</b>542-88-01592</p>
+                    <p><b>주소</b>서울특별시 서초구 효령로 72길 60 한전아트센터 본관 7~8층</p>         
+                </div>
+
+                <div class="footer_ft">
+                    <h5>Family Site</h5>
+                    <h2 style="margin: 0 auto; margin: 25px 0;
+                    width: 100%; height: 1px; background-color: #770000;"></h2>
+                    <p>Copyright © 2024 LX Glas Corp. ALL RIGHTS RESERVED.</p>
+                    <ul class="ft_pr">
+                        <li>개인정보처리방침</li>
+                        <li>문의하기</li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    
+</body>
+</html>
